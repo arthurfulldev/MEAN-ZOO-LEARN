@@ -1,0 +1,25 @@
+<nav class="navbar navbar-light bg-light px-4 py-0 mb-3">
+    <span class="navbar-brand mb-0 h1"><img src="assets/logo.svg" alt="logo"> Zoo</span>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="home" routerLinkActive="active"><i class="material-icons">web</i> Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="animals" routerLinkActive="active"><i class="material-icons">pets</i> Animales</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="keepers" routerLinkActive="active"><i class="material-icons">accessibility_new</i> Cuidadores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="store" routerLinkActive="active"><i class="material-icons">store</i> Tienda</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="contact" routerLinkActive="active"><i class="material-icons">mail_outline</i> Contacto</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <router-outlet></router-outlet>    
+</div>

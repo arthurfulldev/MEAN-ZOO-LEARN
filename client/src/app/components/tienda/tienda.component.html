@@ -1,0 +1,22 @@
+<div [@fadeIn]>
+    <h1>{{title}}</h1>
+    <ul>
+        <li>Camiseta rosa</li>
+        <li>Gorra negra</li>
+    </ul>
+    <hr>
+    <p>
+        <input type="text" name="nombreParque" [(ngModel)]="nombreParque" (keyup)="show()"><br>
+        Resultado: {{nombreParque}}
+    </p>
+    <hr>
+    <p>
+        <parques 
+            [nombre]="nombreParque" 
+            [metros]="10000"
+            (getData)="showParqueData($event)"
+            ></parques>
+    </p>
+    <hr>
+    <button class="transiciones">transiciones</button>
+</div>

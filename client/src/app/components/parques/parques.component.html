@@ -1,0 +1,9 @@
+<div [@fadeIn]>
+  <h2>{{nombre}}</h2>
+  <ul>
+    <li>{{metros}}</li>
+    <li>{{vegetacion}}</li>
+    <li><span>{{abierto? 'Abierto': 'Cerrado'}}</span></li>
+  </ul>
+  <input type="button" value="enviar" (click)="send()">
+</div>

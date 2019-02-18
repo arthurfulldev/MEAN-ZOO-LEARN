@@ -1,0 +1,23 @@
+<table class="table table-hover table-striped" [@fadeIn]>
+    <thead class="thead-default">
+        <tr>
+            <th>Nombre</th>
+            <th>Año</th>
+            <th class='th-center'>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let val of mock; let i = index">
+            <th>{{i+1}} Oso panda</th>
+            <th>2019</th>
+            <th class='th-center'>
+                <button class="btn btn-raised btn-sm btn-primary"><i class="material-icons">remove_red_eye</i></button>
+                <button class="btn btn-raised btn-sm btn-info"><i class="material-icons">mode_edit</i></button>
+                <button class="btn btn-raised btn-sm btn-danger"><i class="material-icons">delete</i></button>
+            </th>
+        </tr>
+    </tbody>
+</table>
+<div>
+
+</div>

@@ -1,0 +1,21 @@
+.navbar-brand {
+    img {
+        height: 1.5rem;
+        width: auto;
+    }
+}
+.nav-link{
+    &.active {
+        border-bottom: 3px solid orange;
+    }
+    &:hover{
+        border-bottom: 3px solid gray;
+    }
+    .material-icons{
+        font-size: 1em;
+        padding: 0 .1rem;
+    }
+    display:flex;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+}

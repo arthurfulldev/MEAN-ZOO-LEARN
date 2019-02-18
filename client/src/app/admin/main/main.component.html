@@ -1,0 +1,21 @@
+<div [@fadeIn]>
+    <h1>Panel de administración</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-2 px-0">
+                    <ul class="list-group">
+                        <a [routerLink]="['list']"   routerLinkActive="active" class="list-group-item">Listar</a>
+                        <a [routerLink]="['create']" routerLinkActive="active" class="list-group-item">Crear</a>
+                        <a [routerLink]="['update']" routerLinkActive="active" class="list-group-item">Modificar</a>
+                        <a [routerLink]="['delete']" routerLinkActive="active" class="list-group-item">Borrar</a>
+                    </ul>
+                </div>
+                <div class="col-sm-10">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

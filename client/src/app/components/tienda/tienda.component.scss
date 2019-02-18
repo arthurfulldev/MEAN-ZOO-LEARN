@@ -1,0 +1,17 @@
+.transiciones {
+    &:hover{
+        cursor: pointer;
+        background-color: red;
+        border: 1px dashed green;
+    
+        // Agregar transciciones.
+        transition: 
+            border 2s,
+            background-color 1s ;
+    }
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid green;
+}
