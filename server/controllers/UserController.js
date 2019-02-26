@@ -1,6 +1,8 @@
 'use strict'
 // Modules
 let bcrypt = require('bcrypt-nodejs');
+let fs = require('fs');
+let path = require('path')
 
 // Models
 let User = require('../models/UserModel');
@@ -9,6 +11,7 @@ let User = require('../models/UserModel');
 let jwt = require('../services/jwt');
 
 // Actions
+
 function createUser ( req, res ) {
     let params = req.body;
     let user = new User();
@@ -64,7 +67,7 @@ function login( req, res ) {
             } else {
                 bcrypt.compare( password, usr.password, ( err, check ) => {
                     if( err ){
-                        return res.status(500).send({ message: 'Se produjo un error interno. Intenta mas tarde'})
+                        return res.status(500).send({ message: 'Usuario o contraseña incorrecto, vuelve a intentarlo.'})
                     }
                     if(check) {
                         if( params.getToken ) {
@@ -98,7 +101,7 @@ function updateUser ( req, res ){
     User.findByIdAndUpdate(userID, update, {new: true},( err, userUpdate ) => {
         if ( err ) {
             res.status(500).send({
-                messsage: 'Error al actualizar el usuario.'
+                message: 'Error al actualizar el usuario.'
             })
         } else {
             if ( !userUpdate ) {
@@ -115,8 +118,65 @@ function updateUser ( req, res ){
     })
 }
 
+function uploadAvatar ( req, res ) {
+    let userId = req.params.id;
+    let file_name = 'No se ha subido ningun archivo';
+    let imgsExt = [ 'png', 'jpg', 'gif', 'jpeg', 'svg' ]
+
+    if ( req.files) {
+        var file_path = req.files.image.path;
+        var file_split = file_path.split('\\');
+        file_name = file_split[2];
+        let ext = file_name.split('.').pop();
+
+        console.log(imgsExt.indexOf(ext));
+
+        if( imgsExt.indexOf(ext) == -1 ) {
+            fs.unlink(file_path, (err) => {
+                if(err){
+                    res.status(500).send({ message: 'No se pudo borrar el archivo'})
+                }
+                res.status(200).send({ message: 'Este arcihvo no es valido'});
+            });
+        } else {
+            if ( !userId == req.user.sub ){
+                res.status(500).send({ message: 'No tienes permisos para actualizar este usuario.' })
+            }
+
+            User.findByIdAndUpdate( userId, { image: file_name }, { new: true }, ( err, userUpdate ) => {
+                if( err ) {
+                    res.status(500).send({ message: 'No se pudo agregar el avatar'})
+                } else {
+                    if( !userUpdate ){
+                        res.status(404).send({ message: 'No se ha actualizado el usuario...' })
+                    }
+                    res.status(200).send({ message: 'Avatar agregado', usuario: userUpdate })
+                }
+            })
+        }
+    } else {
+        res.status(200).send({ message: file_name});
+    }
+    
+}
+
+function getImageFile( req, res ) {
+    let image = req.params.imageFile;
+    let path_image = './uploads/users/' + image;
+
+    fs.exists( path_image, ( exist ) => {
+        if( exist ){
+            res.sendFile(path.resolve(path_image));
+        } else {
+            res.status(404).send({ message: 'No se encontro la imagen'})
+        }
+    })
+}
+
 module.exports = {
     createUser,
     login,
-    updateUser
+    updateUser,
+    uploadAvatar,
+    getImageFile
 }

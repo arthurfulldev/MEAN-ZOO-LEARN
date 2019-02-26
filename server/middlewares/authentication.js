@@ -8,7 +8,7 @@ let secret = 'La clave secreta para awt';
 exports.ensureAuth = function ( req, res, next ) {
     if ( ! req.headers.authorization ) {
         return res.status(403).send({
-            message: 'La peticion no tiene cabecera de autenticación'
+            message: 'La peticion no tiene cabecera de autenticación.',
         })
     }
     let token =  req.headers.authorization.replace(/['"]+/g, '');
